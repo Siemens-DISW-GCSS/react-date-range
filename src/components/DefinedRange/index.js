@@ -15,10 +15,11 @@ class DefinedRange extends Component {
     };
   }
 
-  handleRangeChange = range => {
-    const { onChange, ranges, focusedRange } = this.props;
+  handleRangeChange = (range, label) => {
+    const { onChange, ranges, focusedRange, onInputClick } = this.props;
     const selectedRange = ranges[focusedRange[0]];
     if (!onChange || !selectedRange) return;
+    onInputClick(label);
     onChange({
       [selectedRange.key || `range${focusedRange[0] + 1}`]: { ...selectedRange, ...range },
     });
@@ -83,7 +84,7 @@ class DefinedRange extends Component {
                     : null,
                 }}
                 key={i}
-                onClick={() => this.handleRangeChange(staticRange.range(this.props))}
+                onClick={() => this.handleRangeChange(staticRange.range(this.props), labelContent)}
                 onFocus={() => onPreviewChange && onPreviewChange(staticRange.range(this.props))}
                 onMouseOver={() =>
                   onPreviewChange && onPreviewChange(staticRange.range(this.props))
@@ -124,6 +125,7 @@ DefinedRange.propTypes = {
   focusedRange: PropTypes.arrayOf(PropTypes.number),
   onPreviewChange: PropTypes.func,
   onChange: PropTypes.func,
+  onInputClick: PropTypes.func,
   footerContent: PropTypes.any,
   headerContent: PropTypes.any,
   rangeColors: PropTypes.arrayOf(PropTypes.string),
