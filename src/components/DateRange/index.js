@@ -111,7 +111,6 @@ class DateRange extends Component {
     onRangeFocusChange && onRangeFocusChange(newSelection.nextFocusRange);
   };
   handleRangeFocusChange = focusedRange => {
-    console.log('range focus')
     this.setState({ focusedRange });
     this.props.onRangeFocusChange && this.props.onRangeFocusChange(focusedRange);
   };
