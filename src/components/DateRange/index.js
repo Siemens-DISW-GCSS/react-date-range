@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Calendar from '../Calendar';
 import { rangeShape } from '../DayCell';
 import { findNextRangeIndex, generateStyles } from '../../utils';
-import { isBefore, differenceInCalendarDays, addDays, min, isWithinInterval, max } from 'date-fns';
+import { isBefore, differenceInCalendarDays, addDays, min, isWithinInterval, max, format } from 'date-fns';
 import classnames from 'classnames';
 import coreStyles from '../../styles';
 
@@ -101,6 +101,7 @@ class DateRange extends Component {
       [selectedRange.key || `range${focusedRangeIndex + 1}`]: {
         ...selectedRange,
         ...newSelection.range,
+        label: `${format(newSelection.range.startDate, 'yyyy-MM-dd')} - ${format(newSelection.range.endDate, 'yyyy-MM-dd')}`
       },
     });
     this.setState({
@@ -110,6 +111,7 @@ class DateRange extends Component {
     onRangeFocusChange && onRangeFocusChange(newSelection.nextFocusRange);
   };
   handleRangeFocusChange = focusedRange => {
+    console.log('range focus')
     this.setState({ focusedRange });
     this.props.onRangeFocusChange && this.props.onRangeFocusChange(focusedRange);
   };
