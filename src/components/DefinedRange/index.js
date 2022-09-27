@@ -21,7 +21,7 @@ class DefinedRange extends Component {
     if (!onChange || !selectedRange) return;
     onInputClick(label);
     onChange({
-      [selectedRange.key || `range${focusedRange[0] + 1}`]: { ...selectedRange, ...range },
+      [selectedRange.key || `range${focusedRange[0] + 1}`]: { ...selectedRange, ...range, label },
     });
   };
 
